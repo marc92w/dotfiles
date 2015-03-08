@@ -111,34 +111,8 @@ export LESS_TERMCAP_so=$'\E[38;5;246m' # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
-#logo and greeting
-echo -e "\n";
-echo -e "\033[1;31m       \$\$\$\$\$\$\$                                         \$";          
-echo -e "\033[1;31m    \$\$\$\$     \$\$\$\$ \033[0m          MMM           MMM \033[1;31m       \$\$\$\$\$";                  
-echo -e "\033[1;31m   \$\$          \$\$\$  \033[0m        MMM           MMM   \033[1;31m       \$";                
-echo -e "\033[1;31m  \$\$      \$\$\$   \$\$ \033[0m         MMM           MMM";                            
-echo -e "\033[1;31m \$\$     \$       \$\$   \033[0m  MMMMMMMM   MMMMMM  MMM MMMMM   MMM  MMMMMMMM   M MMMMMMM";
-echo -e "\033[1;31m \$\$     \$       \$\$   \033[0m MMM   MMM  MM    MM MMMM   MMM  MMM  M     MM   MMM    MM";
-echo -e "\033[1;31m \$      \$       \$  \033[0m  MMM    MMM MMM    MM MMM    MMM  MMM        MM   MMM    MM";
-echo -e "\033[1;31m \$       \$    \$\$  \033[0m   MMM    MMM MMMMMMMMM MMM     MM  MMM   MMMMMMM   MMM    MM"; 
-echo -e "\033[1;31m \$\$       \$\$\$\$  \033[0m     MMM    MMM MMM       MMM     MM  MMM MMM    MM   MMM    MM"; 
-echo -e "\033[1;31m  \$\$                \033[0m MMM    MMM MMM       MMM    MMM  MMM MMM    MM   MMM    MM";
-echo -e "\033[1;31m   \$\$               \033[0m  MMM   MMM  MMM      MMM    MM   MMM MMM   MMM   MMM    MM"; 
-echo -e "\033[1;31m     \$\$              \033[0m  MMMMMMMM   MMMMMMM MMMMMMMM    MMM  MMMMM MMM  MMM    MM"; 
-echo -e "\033[1;31m       \$";
-echo -e "\033[1;33m                       Willkommen auf meinem Raspberry Pi! \033[0m";
-echo -e "=========================================================================================="
-echo -e "\033[1;33m Debian Verson:   	\033[0m" `cat /etc/debian_version`
-echo -e "\033[1;33m Kernel Version:  	\033[0m" `uname -a | awk '{print $3}'`
-echo -e "\033[1;33m Rasp-Build-Datum:	\033[0m" `more /boot/issue.txt | grep '20' | awk '{print $4}'`
-echo -e "=========================================================================================="
-echo -e "\033[1;33m Systemzeit:     	\033[0m" `date | awk '{print $4}'` "Uhr"
-echo -e "\033[1;33m Online seit:    	\033[0m" `uptime | awk '{print $3}'` "Stunden"
-echo -e "=========================================================================================="
-echo -e "\033[1;33m Speichernutzung:	\033[0m" `cat /proc/meminfo|grep 'MemF'| awk '{print $2/1000}'` "MB von" `cat /proc/meminfo|grep 'MemT'| awk '{print $2/1000}'` "MB frei"
-echo -e "\033[1;33m CPU-Takt:       	\033[0m" `sudo cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq | awk '{print $1/1000}'` "MHz"
-echo -e "\033[1;33m CPU-Temperatur: 	\033[0m" `cat /sys/class/thermal/thermal_zone0/temp | awk '{printf("%.1f\n", $1/1000)}'` "°C"
-echo -e "=========================================================================================="
-echo -e "\033[1;33m User     Anschluss     Seit              von\033[0m"
-/usr/bin/who
-echo -e "==========================================================================================";
+# display logo and greeting
+if [ -f ~/.bash_greeting ]; then
+  . ~/.bash_greeting
+fi
+
