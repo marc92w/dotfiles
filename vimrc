@@ -8,7 +8,8 @@ set ruler
 
 "" Coding style
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%100v.\+/
+set tw=100
 
 "" Whitespace
 set nowrap                      " don't wrap lines
