@@ -17,15 +17,70 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set autoindent                  " indent automatically
- 
+
 "" Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital
-                                " letter
+set smartcase                   " ... unless they contain at least one capital letter
 
-"" Disable arrow keys
+"" Scrolling
+set scrolloff=10
+
+"" Colorscheme
+colors monokai
+
+"" Statusline
+set statusline=
+set statusline+=\[%n]                                  "buffernr
+set statusline+=\ %<%F\                                "File+path
+set statusline+=\ %y\                                  "FileType
+set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=\ %{&spelllang}\ %{HighlightSearch()}\  "Spellanguage & Highlight on?
+set statusline+=\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
+set statusline+=\ col:%03c\                            "Colnr
+set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+
+function! HighlightSearch()
+  if &hls
+    return 'H'
+  else
+    return ''
+  endif
+endfunction
+
+" Mode Indication -Prominent!
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'                    " Insert Mode when pressing 'i'
+    hi statusline ctermbg=197
+  elseif a:mode == 'r'                " Replace Mode when pressing 'R'
+    hi statusline ctermbg=81
+  else
+    hi statusline ctermbg=141
+  endif
+endfunction
+
+function! InsertLeaveActions()
+  hi statusline ctermbg=148
+  hi statusline ctermfg=black
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * call InsertLeaveActions()
+
+" to handle exiting insert mode via a control-C
+inoremap <c-c> <c-o>:call InsertLeaveActions()<cr><c-c>
+
+" default the statusline to green when entering Vim
+hi statusline ctermbg=148
+hi statusline ctermfg=black
+
+" have a permanent statusline to color
+set laststatus=2
+
+" Disable arrow keys
 noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
