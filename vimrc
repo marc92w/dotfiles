@@ -13,8 +13,8 @@ set tw=100
 
 "" Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set expandtab                   " use spaces, instead of tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set autoindent                  " indent automatically
 
@@ -30,7 +30,18 @@ set scrolloff=10
 "" Colorscheme
 colors monokai
 
-"" Statusline
+"" indentation guides
+let g:indent_guides_enable_on_vim_startup=1
+let indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=236
+hi IndentGuidesEven ctermbg=237
+
+"" Statusline configuration
+"" ------------------------------
+"" Always show a statusline
+set laststatus=2
+
+"" Configure contents
 set statusline=
 set statusline+=\[%n]                                  "buffernr
 set statusline+=\ %<%F\                                "File+path
@@ -79,6 +90,11 @@ hi statusline ctermfg=black
 
 " have a permanent statusline to color
 set laststatus=2
+
+" to avoid problems with indent during pasting
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " Disable arrow keys
 noremap <Up> <nop>
