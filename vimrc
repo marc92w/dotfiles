@@ -1,23 +1,28 @@
-" Marc Weise
-" Organization based on dougblackio's .vimrc (http://dougblack.io/words/a-good-vimrc.html)
+" Author: Marc Weise (marc92w@yahoo.de)
+" File structure based on dougblackio's .vimrc (http://dougblack.io/words/a-good-vimrc.html)
 
+" General {{{
 set nocompatible                                          " choose no compatibility with legacy vi
 set encoding=utf-8
+" }}}
 
-" Colors
+" Colors {{{
 colorscheme monokai
 syntax enable
+" }}}
 
-" Line Length
+" Line Length {{{
 call matchadd('ColorColumn', '\%101v', 100)
 set tw=100
+" }}}
 
-" Whitespace (Tabs & Spaces)
+" Whitespace (Tabs & Spaces) {{{
 set nowrap                                                " don't wrap lines
 set tabstop=2 shiftwidth=2                                " a tab is two spaces
 set expandtab                                             " use spaces, instead of tabs
+" }}}
 
-" Indentation
+" Indentation {{{
 set backspace=indent,eol,start                            " backspace through everything in INSERT
 set autoindent                                            " indent automatically
 let g:indent_guides_enable_on_vim_startup=1
@@ -26,16 +31,18 @@ hi IndentGuidesOdd  ctermbg=236
 hi IndentGuidesEven ctermbg=237
 nnoremap <F2> :set invpaste paste?<CR>                    " use F2 to toogle paste mode
 set pastetoggle=<F2>
+" }}}
 
-" UI Layout
+" UI Layout {{{
 set number                                                " show line numbers
 set showmode
 set showcmd                                               " show command in bottom bar 
 filetype plugin indent on                                 " load file type plugins + indentation
 set wildmenu                                              " visual autocomplete for command menu
 set ruler
+" }}}
 
-" Statusline
+" Statusline {{{
 set laststatus=2                                          " always show a statusline
 set statusline=
 set statusline+=\[%n]                                     " number of current buffer
@@ -57,33 +64,37 @@ inoremap <c-c> <c-o>:call InsertLeaveActions()<cr><c-c>   " handle exiting inser
 hi statusline ctermbg=148                                 " default background of statusline green
 hi statusline ctermfg=235
 
-" have a permanent statusline to color
-set laststatus=2
+set laststatus=2                                          " have a permanent statusline to color
+" }}}
 
-" Searching
+" Searching {{{
 set incsearch                                             " Search as characters are entered
 set hlsearch                                              " highlight matches
 set ignorecase                                            " search is case insensitive...
 set smartcase                                             " ... unless it contains a capital letter
 nnoremap \ :noh<CR>                                       " turn of search highlight
+" }}}
 
-" Folding
+" Folding {{{
 set foldenable                                            " enable folding
 set foldlevelstart=10                                     " open most folds by default
 set foldnestmax=10                                        " 10 nested fold maximum
 set modelines=1
+" }}}
 
-" Movement
+" Movement {{{
 set scrolloff=10                                          " show at least 10 rows above and below
 noremap <Up> <nop>                                        " disable arrow keys
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+" }}}
 
-" Leader Shortcuts
+" Leader Shortcuts {{{
 let mapleader=","                                         " leader is comma
+" }}}
 
-" Custom functions
+" Custom functions {{{
 function! HighlightSearch()
   if &hls
     return 'H'
@@ -92,8 +103,7 @@ function! HighlightSearch()
   endif
 endfunction
 
-" Prominent Mode Indication 
-function! InsertStatuslineColor(mode)
+function! InsertStatuslineColor(mode)                     " Prominent Mode Indication 
   if a:mode == 'i'                                        " Insert Mode 
     hi statusline ctermbg=197
   elseif a:mode == 'r'                                    " Replace Mode 
@@ -107,5 +117,6 @@ function! InsertLeaveActions()
   hi statusline ctermbg=148
   hi statusline ctermfg=235
 endfunction
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
