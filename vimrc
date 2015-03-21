@@ -18,11 +18,14 @@ let $LANG = 'en'
 " User Interface (GVIM) {{{
 if has("gui_running")
   if has("gui_win32")
-    set guifont=Consolas:h14:cANSI                          " set up the font for gVim in windows
+    set guifont=Consolas:h12:cANSI                          " set up the font for gVim in windows
   endif
 
   set guioptions-=m                                         " hide menu bar (gvim)
   set guioptions-=T                                         " hide toolbar (gvim)
+  set guioptions-=r                                         " hide right-hand scroll bar
+  set guioptions-=L                                         " hide left-hand scroll bar
+
   set visualbell                                            " flash window instead of beep
 endif
 " }}}
